@@ -1,36 +1,47 @@
 <html>
   <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Merazi's music page</title>
+    <link rel="icon" type="image/png" href="logo.png" />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div>
+    <header>
       <a href="https://merazi.github.io">Back to my blog</a>
-      <h1>How I make my music</h1>
-      <p>I'm a <a href="https://www.debian.org/">Debian</a> user (btw), so I use a DAW that's compatible with Linux. That DAW is <a href="https://lmms.io/">LMMS</a>.</p>
-      <p>Whenever I want to record anything I just use my phone and then I use <a href="https://www.audacityteam.org/download/">Audacity</a> to cleanup the audio.</p>
+      <div class="site-brand">
+        <img class="site-logo" src="logo.png" alt="" />
+        <h1>My music</h1>
+      </div>
+      <p>A collection of things I've made. Press play to listen.</p>
+    </header>
 
-      <div class="music-grid">
-
-        <!-- Paperclip -->
-        <div class="song-player">
+    <main>
+      <section class="music-list" aria-label="Music">
+        <article class="song-player">
           <img src="https://ia600105.us.archive.org/15/items/merazi_paperclip/Paperclip.jpeg" alt="Paperclip cover art">
           <div class="song-player-controls">
-            <p><b>Paperclip</b> - 09/06/2026</p> 
+            <p><b>Paperclip</b> - 09/06/2026</p>
             <audio controls src="https://ia800105.us.archive.org/15/items/merazi_paperclip/Paperclip.mp3"></audio>
           </div>
-        </div>
+          <a class="download-button" href="https://ia800105.us.archive.org/15/items/merazi_paperclip/Paperclip.mp3" download="Paperclip.mp3">Download</a>
+        </article>
 
-        <!-- sdcard -->
-        <div class="song-player">
+        <article class="song-player">
           <img src="https://ia903209.us.archive.org/26/items/sdcard_202609/sdcard.jpeg" alt="sdcard cover art">
           <div class="song-player-controls">
-            <p><b>sdcard</b> - 02/01/2026</p> 
+            <p><b>sdcard</b> - 02/01/2026</p>
             <audio controls src="https://ia903209.us.archive.org/26/items/sdcard_202609/sdcard.mp3"></audio>
           </div>
-        </div>
+          <a class="download-button" href="https://ia903209.us.archive.org/26/items/sdcard_202609/sdcard.mp3" download="sdcard.mp3">Download</a>
+        </article>
+      </section>
 
-      </div>
-
+      <section aria-labelledby="making-music">
+        <h2 id="making-music">How I make my music</h2>
+        <p>I'm a <a href="https://www.debian.org/">Debian</a> user (btw), so I use a DAW that's compatible with Linux. That DAW is <a href="https://lmms.io/">LMMS</a>.</p>
+        <p>Whenever I want to record anything I just use my phone and then I use <a href="https://www.audacityteam.org/download/">Audacity</a> to clean up the audio.</p>
+      </section>
+    </main>
   </body>
 </html>
