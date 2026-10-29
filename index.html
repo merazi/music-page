@@ -7,21 +7,28 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <header>
-      <a href="https://merazi.github.io">Back to my blog</a>
-      <div class="site-brand">
-        <img class="site-logo" src="logo.png" alt="" />
-        <h1>My music</h1>
-      </div>
-      <p>A collection of things I've made. Press play to listen.</p>
+    <header id="site-header">
+      <h1><a href="https://merazi.github.io/">Merazi</a></h1>
+      <p class="tagline">Notes on Linux, old hardware, digital minimalism, and productivity.</p>
+      <nav aria-label="Main navigation">
+        <ul class="nav-links">
+          <li><a href="https://merazi.github.io/posts/">Posts</a></li>
+          <li><a href="https://merazi.github.io/archives/">Archive</a></li>
+          <li><a href="https://merazi.github.io/tags/">Tags</a></li>
+          <li><a href="https://merazi.github.io/music-page/" aria-current="page">Music</a></li>
+        </ul>
+      </nav>
     </header>
 
     <main>
+      <h2>My music</h2>
+      <p>A collection of things I've made. Press play to listen.</p>
+
       <section class="music-list" aria-label="Music">
         <article class="song-player">
           <img src="https://ia600105.us.archive.org/15/items/merazi_paperclip/Paperclip.jpeg" alt="Paperclip cover art">
           <div class="song-player-controls">
-            <p><b>Paperclip</b> - 09/06/2026</p>
+            <p><strong>Paperclip</strong> <span class="song-date">- 09/06/2026</span></p>
             <audio controls src="https://ia800105.us.archive.org/15/items/merazi_paperclip/Paperclip.mp3"></audio>
           </div>
           <a class="download-button" href="https://ia800105.us.archive.org/15/items/merazi_paperclip/Paperclip.mp3" download="Paperclip.mp3">Download</a>
@@ -30,7 +37,7 @@
         <article class="song-player">
           <img src="https://ia903209.us.archive.org/26/items/sdcard_202609/sdcard.jpeg" alt="sdcard cover art">
           <div class="song-player-controls">
-            <p><b>sdcard</b> - 02/01/2026</p>
+            <p><strong>sdcard</strong> <span class="song-date">- 02/01/2026</span></p>
             <audio controls src="https://ia903209.us.archive.org/26/items/sdcard_202609/sdcard.mp3"></audio>
           </div>
           <a class="download-button" href="https://ia903209.us.archive.org/26/items/sdcard_202609/sdcard.mp3" download="sdcard.mp3">Download</a>
@@ -43,5 +50,45 @@
         <p>Whenever I want to record anything I just use my phone and then I use <a href="https://www.audacityteam.org/download/">Audacity</a> to clean up the audio.</p>
       </section>
     </main>
+
+    <footer id="site-footer">
+      <p>Made with love &middot; With my hands</p>
+      <p>
+        <a href="https://mastodon.social/@ttydweller">mastodon</a> &middot;
+        <a href="https://github.com/merazi">github</a> &middot;
+        <a href="https://merazi.github.io/index.xml">rss</a>
+      </p>
+      <p>&copy; 2026 Merazi &middot; Powered by <a href="https://gohugo.io">Hugo</a></p>
+    </footer>
+    <script>
+      document.querySelectorAll(".download-button").forEach((link) => {
+        link.addEventListener("click", async (event) => {
+          event.preventDefault();
+          if (link.getAttribute("aria-busy") === "true") return;
+
+          const label = link.textContent;
+          link.setAttribute("aria-busy", "true");
+          link.textContent = "Preparing...";
+
+          try {
+            const response = await fetch(link.href);
+            if (!response.ok) throw new Error(`Download failed: ${response.status}`);
+
+            const fileUrl = URL.createObjectURL(await response.blob());
+            const download = document.createElement("a");
+            download.href = fileUrl;
+            download.download = link.download;
+            download.click();
+            setTimeout(() => URL.revokeObjectURL(fileUrl), 60000);
+            link.textContent = label;
+          } catch (error) {
+            link.textContent = "Download failed; retry";
+            setTimeout(() => { link.textContent = label; }, 4000);
+          } finally {
+            link.removeAttribute("aria-busy");
+          }
+        });
+      });
+    </script>
   </body>
 </html>

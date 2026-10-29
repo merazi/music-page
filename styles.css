@@ -1,22 +1,48 @@
 body {
-  max-width: 48rem;
-  margin: 2rem auto;
-  padding: 0 1rem;
+  max-width: 660px;
+  margin: 40px auto;
+  padding: 0 16px;
+  color: #222;
+  background: #fff;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 16px;
+  line-height: 1.7;
 }
 
-header {
-  margin-bottom: 2rem;
+a { color: #005a9c; }
+a:hover { color: #c00; }
+
+h1 { font-size: 1.5em; }
+h2 { font-size: 1.3em; }
+h3 { font-size: 1.1em; }
+h1, h2, h3 { line-height: 1.3; margin-top: 1.5em; }
+
+#site-header {
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 12px;
+  margin-bottom: 24px;
 }
 
-.site-brand {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
+#site-header h1 {
+  margin: 0 0 4px;
+  font-size: 1.4em;
 }
 
-.site-logo {
-  width: 3rem;
-  height: 3rem;
+#site-header .tagline {
+  margin: 0 0 8px;
+  color: #555;
+  font-size: 0.9em;
+}
+
+.nav-links {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nav-links li {
+  display: inline;
+  margin-right: 12px;
 }
 
 .music-list {
@@ -24,7 +50,8 @@ header {
 }
 
 .song-player {
-  display: flex;
+  display: grid;
+  grid-template-columns: 6rem minmax(0, 1fr) auto;
   align-items: center;
   gap: 1rem;
   padding: 1rem 0;
@@ -38,12 +65,16 @@ header {
 }
 
 .song-player-controls {
-  flex: 1;
   min-width: 0;
 }
 
 .song-player-controls p {
   margin-top: 0;
+}
+
+.song-date {
+  color: #555;
+  font-size: 0.85em;
 }
 
 audio {
@@ -52,32 +83,44 @@ audio {
 }
 
 .download-button {
-  padding: 0.4rem 0.6rem;
-  border: 1px solid #888;
-  color: inherit;
-  text-decoration: none;
   white-space: nowrap;
 }
 
-.download-button:hover {
-  background: #eee;
+#site-footer {
+  border-top: 1px solid #ccc;
+  padding-top: 12px;
+  margin-top: 40px;
+  color: #555;
+  font-size: 0.85em;
+  text-align: center;
+}
+
+@media (prefers-color-scheme: dark) {
+  body { color: #d4d4d4; background: #1a1a1a; }
+  a { color: #6db3f2; }
+  a:hover { color: #ff6b6b; }
+  #site-header, .song-player { border-color: #444; }
+  #site-header .tagline, .song-date { color: #999; }
+  #site-footer { border-color: #444; color: #999; }
 }
 
 @media (max-width: 30rem) {
-  .song-player img {
-    width: 4rem;
-    height: 4rem;
+  body {
+    margin: 24px auto;
   }
 
   .song-player {
-    flex-wrap: wrap;
+    grid-template-columns: 4rem minmax(0, 1fr);
+    gap: 0.5rem 1rem;
   }
 
-  .song-player-controls {
-    flex-basis: calc(100% - 5rem);
+  .song-player img {
+    width: 4rem;
+    height: 4rem;
+    grid-row: span 2;
   }
 
   .download-button {
-    margin-left: 5rem;
+    grid-column: 2;
   }
 }
